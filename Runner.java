@@ -26,10 +26,10 @@ admin.save();
 //        Department.deleteById(21);
         Department.all();
 //
-//        Employee employee1 = new Employee("Suzie Smith", department1, 45000);
+Employee employee1 = new Employee("Suzie Smith", department1, 45000);
 //        Employee employee2 = new Employee("Jamie Jones", department2, 25000);
 //
-//        employee1.save();
+employee1.save();
 //        employee2.save();
 
     }
