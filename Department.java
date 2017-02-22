@@ -34,7 +34,9 @@ public class Department {
         try {
             while (rs.next()) {
                 String title = rs.getString("title");
+                int id = rs.getInt("id");
                 System.out.println(title);
+                System.out.println(id);
                 System.out.println();
             }
         } catch (Exception e) {
@@ -46,14 +48,19 @@ public class Department {
         }
     }
         public void update(){
-            String sql = String.format("UPDATE departments SET title = '%s' WHERE id = %d", this.title, this.id);
+            String sql = String.format("UPDATE departments SET title = '%s' WHERE id = %d;", this.title, this.id);
             SqlRunner.executeUpdate(sql);
             SqlRunner.closeConnection();
 
         }
+        public void setTitle(String title) {
+            this.title = title;
+        }
+    public static void delete(int id){
+        String sql = String.format("DELETE FROM departments WHERE id = %d;", id);
+        SqlRunner.executeUpdate(sql);
+        SqlRunner.closeConnection();
 
-    public void setTitle(String title) {
-        this.title = title;
     }
 }
 //      Create CRUD functions to save, select all (static), delete all(static),
