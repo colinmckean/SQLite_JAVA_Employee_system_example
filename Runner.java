@@ -31,6 +31,7 @@ Employee employee1 = new Employee("Suzie Smith", department1, 45000);
 //
 employee1.save();
 //        employee2.save();
+        Employee.deleteAll();
 
     }
 }

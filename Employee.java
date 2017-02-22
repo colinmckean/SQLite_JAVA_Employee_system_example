@@ -34,4 +34,9 @@ public class Employee {
         this.id = SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
+    public static void deleteAll(){
+        String sql = "DELETE FROM employees;";
+        SqlRunner.executeUpdate(sql);
+        SqlRunner.closeConnection();
+    }
 }
