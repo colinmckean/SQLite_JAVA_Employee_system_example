@@ -4,9 +4,10 @@
 
 public class Runner {
     public static void main(String[] args){
-
-        Department.deleteAll();
-        Employee.deleteAll();
+//
+//
+//        Department.deleteAll();
+//        Employee.deleteAll();
         Department department1 = new Department("HR");
         Department department2 = new Department("Marketing");
         Department sales = new Department("Sales");
@@ -46,8 +47,13 @@ public class Runner {
         employee8.save();
         employee9.save();
         employee10.save();
-
-
+//employee5.setName("Steve Rodgers");
+//employee5.setSalary(12345.00);
+//employee5.setDepartment(finance);
+//employee5.update();
+        Employee.all();
+        employee9.delete();
+Employee.deleteById(14);
         Employee.all();
 
     }

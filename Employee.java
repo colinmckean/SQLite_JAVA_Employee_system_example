@@ -42,7 +42,6 @@ public class Employee {
         SqlRunner.closeConnection();
     }
 
-    //"SELECT artists.name, albums.title, albums.genre FROM artists JOIN albums on artists.id = albums.artist_id WHERE artists.id = %d;", this.id);
     public static void all() {
         String sql = "SELECT e.id, e.name, e.salary, d.title FROM employees e JOIN departments d on d.ID = e.department_id;";
         ResultSet rs = SqlRunner.executeQuery(sql);
@@ -65,5 +64,38 @@ public class Employee {
             SqlRunner.closeConnection();
         }
 
+
+    }
+
+    public void update(){
+        String sql = String.format("UPDATE employees SET name = '%s', salary = %7.2f, department_id = %d WHERE id = %d;", this.name, this.salary, this.department.getId(), this.id);
+        SqlRunner.executeUpdate(sql);
+        SqlRunner.closeConnection();
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public static void deleteById(int id){
+        String sql = String.format("DELETE FROM employees WHERE id = %d;", id);
+        SqlRunner.executeUpdate(sql);
+        SqlRunner.closeConnection();
+
+    }
+    public void delete(){
+        String sql = String.format("DELETE FROM employees WHERE id = %d;", this.id);
+        SqlRunner.executeUpdate(sql);
+        SqlRunner.closeConnection();
     }
 }

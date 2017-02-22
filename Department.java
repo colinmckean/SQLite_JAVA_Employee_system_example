@@ -47,15 +47,18 @@ public class Department {
             SqlRunner.closeConnection();
         }
     }
+
         public void update(){
             String sql = String.format("UPDATE departments SET title = '%s' WHERE id = %d;", this.title, this.id);
             SqlRunner.executeUpdate(sql);
             SqlRunner.closeConnection();
 
         }
+
         public void setTitle(String title) {
             this.title = title;
         }
+
     public static void deleteById(int id){
         String sql = String.format("DELETE FROM departments WHERE id = %d;", id);
         SqlRunner.executeUpdate(sql);
@@ -67,6 +70,7 @@ public class Department {
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
+
 }
 //      Create CRUD functions to save, select all (static), delete all(static),
 //      delete one and update for departments and employees. Create Departments Sales,
