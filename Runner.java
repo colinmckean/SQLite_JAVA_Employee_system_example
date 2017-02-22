@@ -10,6 +10,7 @@ public class Runner {
 //
         department1.save();
         department2.save();
+        Department.all();
 //
 //        Employee employee1 = new Employee("Suzie Smith", department1, 45000);
 //        Employee employee2 = new Employee("Jamie Jones", department2, 25000);
