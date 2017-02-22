@@ -57,6 +57,8 @@ employee10.save();
 //        Employee.all();
         Employee.viewEmployeeById(24);
         Employee.viewEmployeeByName("Wally");
+        Department.viewDepartmentByTitle("Admin");
+        Employee.findDeptByName("Jamie Jones");
 
 
 

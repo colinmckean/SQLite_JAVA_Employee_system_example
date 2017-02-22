@@ -149,6 +149,28 @@ public class Employee {
         }
     }
 
+    public static void findDeptByName(String nameToFind){
+        String sql = String.format(
+                "SELECT e.id, e.name, d.title FROM employees e JOIN departments d on d.ID = e.department_id WHERE e.name = '%s';", nameToFind);
+        ResultSet rs = SqlRunner.executeQuery(sql);
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String name = rs.getString("name");
+                String department = rs.getString("title");
+                System.out.print(id + ": ");
+                System.out.println(name + " works in " + department);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " : " + e.getMessage());
+            System.exit(0);
+
+        } finally {
+            SqlRunner.closeConnection();
+        }
+
+    }
+
 
 
 }

@@ -70,6 +70,25 @@ public class Department {
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
+    public static void viewDepartmentByTitle(String departmentToFind) {
+        String sql = String.format(
+                "SELECT id, title FROM departments WHERE title = '%s';", departmentToFind);
+        ResultSet rs = SqlRunner.executeQuery(sql);
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String title = rs.getString("title");
+                System.out.print(id + ": ");
+                System.out.println("Job Title: " + title);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " : " + e.getMessage());
+            System.exit(0);
+
+        } finally {
+            SqlRunner.closeConnection();
+        }
+    }
 
 }
 //      Create CRUD functions to save, select all (static), delete all(static),
