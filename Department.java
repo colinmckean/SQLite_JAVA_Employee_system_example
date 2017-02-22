@@ -23,12 +23,12 @@ public class Department {
         this.id = SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
-    public static  void deleteAll(){
+    public static void deleteAll(){
         String sql = "DELETE FROM departments;";
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
-    public static void all(){
+    public static void all() {
         String sql = "SELECT * FROM departments;";
         ResultSet rs = SqlRunner.executeQuery(sql);
         try {
@@ -37,15 +37,25 @@ public class Department {
                 System.out.println(title);
                 System.out.println();
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + " : " + e.getMessage());
             System.exit(0);
 
-        }finally {
+        } finally {
             SqlRunner.closeConnection();
         }
     }
+        public void update(){
+            String sql = String.format("UPDATE departments SET title = '%s' WHERE id = %d", this.title, this.id);
+            SqlRunner.executeUpdate(sql);
+            SqlRunner.closeConnection();
+
+        }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+}
 //      Create CRUD functions to save, select all (static), delete all(static),
 //      delete one and update for departments and employees. Create Departments Sales,
 //      Finance, Admin Add 2 employees to each department.
-}
