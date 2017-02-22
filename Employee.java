@@ -7,11 +7,13 @@ public class Employee {
     private String name;
     private double salary;
     private Department department;
+    private JobRole description;
 
-    public Employee(String name, Department department, double salary) {
+    public Employee(String name, Department department, double salary, JobRole description) {
         this.name = name;
         this.salary = salary;
         this.department = department;
+        this.description = description;
     }
 
     public String getName() {
@@ -32,7 +34,8 @@ public class Employee {
 
     public void save() {
         int departmentId = department.getId();
-        String sql = String.format("INSERT INTO employees(name, salary, department_id) VALUES ('%s',%7.2f, %d);", this.name, this.salary, departmentId);
+        int descriptionId = description.getId();
+        String sql = String.format("INSERT INTO employees(name, salary, department_id, description_id) VALUES ('%s',%7.2f, %d, %d);", this.name, this.salary, departmentId, descriptionId);
         this.id = SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
@@ -44,7 +47,7 @@ public class Employee {
 
     public static void all() {
         String sql =
-                "SELECT e.id, e.name, e.salary, d.title FROM employees e JOIN departments d on d.ID = e.department_id;";
+                "SELECT e.id, e.name, e.salary, d.title, j.description FROM employees e JOIN departments d on d.ID = e.department_id JOIN descriptions j on j.ID = e.description_id;";
         ResultSet rs = SqlRunner.executeQuery(sql);
         try {
             while (rs.next()) {
@@ -52,9 +55,11 @@ public class Employee {
                 String name = rs.getString("name");
                 double salary = rs.getDouble("salary");
                 String department = rs.getString("title");
+                String description = rs.getString("description");
                 System.out.print(id + ": ");
                 System.out.print("Employee Name: " + name);
                 System.out.print("  Salary: " + salary);
+                System.out.print("  Job: " + description);
                 System.out.println("  Department: " + department);
             }
         } catch (Exception e) {
@@ -102,17 +107,19 @@ public class Employee {
 
     public static void viewEmployeeById(int idToFind){
         String sql = String.format(
-                "SELECT e.id, e.name, e.salary, d.title FROM employees e JOIN departments d on d.ID = e.department_id WHERE e.id = %d;", idToFind);
+                "SELECT e.id, e.name, e.salary, d.title, j.description FROM employees e LEFT JOIN departments d on d.ID = e.department_id LEFT JOIN descriptions j on j.ID = e.description_id WHERE e.id = %d;", idToFind);
         ResultSet rs = SqlRunner.executeQuery(sql);
         try {
             while (rs.next()) {
                 int id = rs.getInt("ID");
                 String name = rs.getString("name");
                 double salary = rs.getDouble("salary");
+                String description = rs.getString("description");
                 String department = rs.getString("title");
                 System.out.print(id + ": ");
                 System.out.print("Employee Name: " + name);
                 System.out.print("  Salary: " + salary);
+                System.out.print("  Job: " + description);
                 System.out.println("  Department: " + department);
             }
         } catch (Exception e) {
@@ -127,7 +134,7 @@ public class Employee {
     }
     public static void viewEmployeeByName(String nameToFind) {
         String sql = String.format(
-                "SELECT e.id, e.name, e.salary, d.title FROM employees e JOIN departments d on d.ID = e.department_id WHERE e.name = '%s';", nameToFind);
+                "SELECT e.id, e.name, e.salary, d.title, j.description FROM employees e LEFT JOIN departments d on d.ID = e.department_id LEFT JOIN descriptions j on j.ID = e.description_id WHERE e.name = '%s';", nameToFind);
         ResultSet rs = SqlRunner.executeQuery(sql);
         try {
             while (rs.next()) {
@@ -135,10 +142,13 @@ public class Employee {
                 String name = rs.getString("name");
                 double salary = rs.getDouble("salary");
                 String department = rs.getString("title");
+                String description = rs.getString("description");
                 System.out.print(id + ": ");
                 System.out.print("Employee Name: " + name);
                 System.out.print("  Salary: " + salary);
+                System.out.print("  Job: " + description);
                 System.out.println("  Department: " + department);
+
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + " : " + e.getMessage());

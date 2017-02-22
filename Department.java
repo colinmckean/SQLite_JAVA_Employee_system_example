@@ -35,9 +35,7 @@ public class Department {
             while (rs.next()) {
                 String title = rs.getString("title");
                 int id = rs.getInt("id");
-                System.out.println(title);
-                System.out.println(id);
-                System.out.println();
+                System.out.println(id + ": " +title);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + " : " + e.getMessage());
