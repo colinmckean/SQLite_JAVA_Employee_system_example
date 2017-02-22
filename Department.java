@@ -56,11 +56,16 @@ public class Department {
         public void setTitle(String title) {
             this.title = title;
         }
-    public static void delete(int id){
+    public static void deleteById(int id){
         String sql = String.format("DELETE FROM departments WHERE id = %d;", id);
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
 
+    }
+    public void delete(){
+        String sql = String.format("DELETE FROM departments WHERE id = %d;", this.id);
+        SqlRunner.executeUpdate(sql);
+        SqlRunner.closeConnection();
     }
 }
 //      Create CRUD functions to save, select all (static), delete all(static),
