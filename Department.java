@@ -75,3 +75,5 @@ public class Department {
 //      Create CRUD functions to save, select all (static), delete all(static),
 //      delete one and update for departments and employees. Create Departments Sales,
 //      Finance, Admin Add 2 employees to each department.
+// Return all details of an employee including their department name.
+//Write static functions to find and return an employee by name and also a department by name.
