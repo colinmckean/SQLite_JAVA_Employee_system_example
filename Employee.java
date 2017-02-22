@@ -125,5 +125,30 @@ public class Employee {
 
 
     }
+    public static void viewEmployeeByName(String nameToFind) {
+        String sql = String.format(
+                "SELECT e.id, e.name, e.salary, d.title FROM employees e JOIN departments d on d.ID = e.department_id WHERE e.name = '%s';", nameToFind);
+        ResultSet rs = SqlRunner.executeQuery(sql);
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String name = rs.getString("name");
+                double salary = rs.getDouble("salary");
+                String department = rs.getString("title");
+                System.out.print(id + ": ");
+                System.out.print("Employee Name: " + name);
+                System.out.print("  Salary: " + salary);
+                System.out.println("  Department: " + department);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " : " + e.getMessage());
+            System.exit(0);
+
+        } finally {
+            SqlRunner.closeConnection();
+        }
+    }
+
+
 
 }
