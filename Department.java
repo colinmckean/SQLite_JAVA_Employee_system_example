@@ -19,15 +19,17 @@ public class Department {
     }
 
     public void save() {
-       String sql = String.format("INSERT INTO departments(title) VALUES ('%s');", this.title);
+        String sql = String.format("INSERT INTO departments(title) VALUES ('%s');", this.title);
         this.id = SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
-    public static void deleteAll(){
+
+    public static void deleteAll() {
         String sql = "DELETE FROM departments;";
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
+
     public static void all() {
         String sql = "SELECT * FROM departments;";
         ResultSet rs = SqlRunner.executeQuery(sql);
@@ -35,7 +37,7 @@ public class Department {
             while (rs.next()) {
                 String title = rs.getString("title");
                 int id = rs.getInt("id");
-                System.out.println(id + ": " +title);
+                System.out.println(id + ": " + title);
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + " : " + e.getMessage());
@@ -46,28 +48,30 @@ public class Department {
         }
     }
 
-        public void update(){
-            String sql = String.format("UPDATE departments SET title = '%s' WHERE id = %d;", this.title, this.id);
-            SqlRunner.executeUpdate(sql);
-            SqlRunner.closeConnection();
+    public void update() {
+        String sql = String.format("UPDATE departments SET title = '%s' WHERE id = %d;", this.title, this.id);
+        SqlRunner.executeUpdate(sql);
+        SqlRunner.closeConnection();
 
-        }
+    }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public static void deleteById(int id){
+    public static void deleteById(int id) {
         String sql = String.format("DELETE FROM departments WHERE id = %d;", id);
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
 
     }
-    public void delete(){
+
+    public void delete() {
         String sql = String.format("DELETE FROM departments WHERE id = %d;", this.id);
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
+
     public static void viewDepartmentByTitle(String departmentToFind) {
         String sql = String.format(
                 "SELECT id, title FROM departments WHERE title = '%s';", departmentToFind);
@@ -89,8 +93,3 @@ public class Department {
     }
 
 }
-//      Create CRUD functions to save, select all (static), delete all(static),
-//      delete one and update for departments and employees. Create Departments Sales,
-//      Finance, Admin Add 2 employees to each department.
-// Return all details of an employee including their department name.
-//Write static functions to find and return an employee by name and also a department by name.

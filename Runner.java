@@ -3,7 +3,7 @@
  */
 
 public class Runner {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 //
 //
 //        Department.deleteAll();
@@ -23,7 +23,6 @@ public class Runner {
         description2.save();
         description3.save();
         description4.save();
-
 
 
         department1.save();
@@ -93,7 +92,6 @@ public class Runner {
         System.out.println("************************************");
         Employee.findDeptByName("Mia Mason");
         System.out.println("************************************");
-
 
 
     }

@@ -39,7 +39,8 @@ public class Employee {
         this.id = SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
-    public static void deleteAll(){
+
+    public static void deleteAll() {
         String sql = "DELETE FROM employees;";
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
@@ -51,7 +52,7 @@ public class Employee {
         ResultSet rs = SqlRunner.executeQuery(sql);
         try {
             while (rs.next()) {
-              int id = rs.getInt("ID");
+                int id = rs.getInt("ID");
                 String name = rs.getString("name");
                 double salary = rs.getDouble("salary");
                 String department = rs.getString("title");
@@ -73,7 +74,7 @@ public class Employee {
 
     }
 
-    public void update(){
+    public void update() {
         String sql = String.format("UPDATE employees SET name = '%s', salary = %7.2f, department_id = %d WHERE id = %d;", this.name, this.salary, this.department.getId(), this.id);
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
@@ -93,19 +94,20 @@ public class Employee {
         this.department = department;
     }
 
-    public static void deleteById(int id){
+    public static void deleteById(int id) {
         String sql = String.format("DELETE FROM employees WHERE id = %d;", id);
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
 
     }
-    public void delete(){
+
+    public void delete() {
         String sql = String.format("DELETE FROM employees WHERE id = %d;", this.id);
         SqlRunner.executeUpdate(sql);
         SqlRunner.closeConnection();
     }
 
-    public static void viewEmployeeById(int idToFind){
+    public static void viewEmployeeById(int idToFind) {
         String sql = String.format(
                 "SELECT e.id, e.name, e.salary, d.title, j.description FROM employees e LEFT JOIN departments d on d.ID = e.department_id LEFT JOIN descriptions j on j.ID = e.description_id WHERE e.id = %d;", idToFind);
         ResultSet rs = SqlRunner.executeQuery(sql);
@@ -132,6 +134,7 @@ public class Employee {
 
 
     }
+
     public static void viewEmployeeByName(String nameToFind) {
         String sql = String.format(
                 "SELECT e.id, e.name, e.salary, d.title, j.description FROM employees e LEFT JOIN departments d on d.ID = e.department_id LEFT JOIN descriptions j on j.ID = e.description_id WHERE e.name = '%s';", nameToFind);
@@ -159,7 +162,7 @@ public class Employee {
         }
     }
 
-    public static void findDeptByName(String nameToFind){
+    public static void findDeptByName(String nameToFind) {
         String sql = String.format(
                 "SELECT e.id, e.name, d.title FROM employees e JOIN departments d on d.ID = e.department_id WHERE e.name = '%s';", nameToFind);
         ResultSet rs = SqlRunner.executeQuery(sql);
@@ -180,7 +183,6 @@ public class Employee {
         }
 
     }
-
 
 
 }
