@@ -28,11 +28,11 @@ public class SqlRunner {
 
     }
 
-    public static void closeConnection(){
-        try{
+    public static void closeConnection() {
+        try {
             stmt.close();
             c.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
